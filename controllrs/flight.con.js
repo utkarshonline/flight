@@ -1,4 +1,3 @@
-
 const Flight = require("../model/flight.model");
 
 exports.getAllFlights = async (req, res) => {
@@ -6,6 +5,7 @@ exports.getAllFlights = async (req, res) => {
     const flights = await Flight.find();
     res.status(200).json(flights);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: "Internal server error" });
   }
 };
@@ -52,7 +52,7 @@ exports.deleteFlight = async (req, res) => {
     if (!flight) {
       return res.status(404).json({ error: "Flight not found" });
     }
-    res.status(204).json();
+    res.status(204).json({ msg: "delete" });
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
   }

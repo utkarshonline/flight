@@ -1,4 +1,3 @@
-
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { connection } = require("../db");
@@ -13,16 +12,13 @@ exports.registerUser = async (req, res) => {
       return res.status(400).json({ error: "User already exists" });
     }
 
-  
     const hashedPassword = await bcrypt.hash(password, 10);
-
 
     user = new User({
       name,
       email,
       password: hashedPassword,
     });
-
 
     await user.save();
 
@@ -42,14 +38,12 @@ exports.loginUser = async (req, res) => {
       return res.status(401).json({ error: "Invalid credentials" });
     }
 
-
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
 
- 
-    const token = jwt.sign({ userId: user._id }, config.jwtSecret, {
+    const token = jwt.sign({ userId: user._id }, "masai", {
       expiresIn: "1h",
     });
 

@@ -1,4 +1,3 @@
-
 const express = require("express");
 const mongoose = require("mongoose");
 const { connection } = require("./db");
@@ -11,7 +10,7 @@ const app = express();
 
 app.use(express.json());
 
-app.use("/api/auth", authRoutes);
+app.use("/api", authRoutes);
 app.use("/api/flights", flightRoutes);
 app.use("/api/bookings", authMiddleware, bookingRoutes);
 
