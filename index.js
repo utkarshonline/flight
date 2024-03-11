@@ -2,19 +2,18 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const { connection } = require("./db");
-const authMiddleware = require("./middleware/authMiddleware");
-const authRoutes = require("./routes/authRoutes");
-const flightRoutes = require("./routes/flightRoutes");
-const bookingRoutes = require("./routes/bookingRoutes");
+const authMiddleware = require("./middleware/authMiddleware.js");
+const authRoutes = require("./routes/user.routes.js");
+const flightRoutes = require("./routes/flight.routes.js");
+const bookingRoutes = require("./routes/booking.routes.js");
 
 const app = express();
 
 app.use(express.json());
 
-// // Routes
-// app.use("/api/auth", authRoutes);
-// app.use("/api/flights", flightRoutes);
-// app.use("/api/bookings", authMiddleware, bookingRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/flights", flightRoutes);
+app.use("/api/bookings", authMiddleware, bookingRoutes);
 
 app.listen(8080, async () => {
   try {
